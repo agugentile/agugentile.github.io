@@ -248,7 +248,7 @@ code{font:500 .9em var(--mono);background:var(--accent-soft);padding:.1em .4em;b
 
 <section class="impact wrap" aria-label="Results at a glance">
   <ul>
-    <li class="rv"><span class="topic">Privacy compliance</span><span class="value" data-count="98.9" data-dec="1" data-suffix="%">98.9%</span><span class="label">of page views now load the consent manager, up from under 1.5%</span></li><li class="rv"><span class="topic">Ad measurement</span><span class="value" data-count="21" data-dec="0" data-suffix="%">21%</span><span class="label">of paid-ad visits never reached analytics, measured by a pipeline I built</span></li><li class="rv"><span class="topic">Click speed</span><span class="value" data-count="0.5" data-dec="1" data-suffix=" s">0.5 s</span><span class="label">less wait after each button click, because I removed a pause in the old tracking code</span></li><li class="rv"><span class="topic">AI automation</span><span class="value" data-count="36" data-dec="0" data-suffix=" pages">36 pages</span><span class="label">now watched for outages, found and added by an AI agent using my audit tool</span></li>
+    <li class="rv"><span class="topic">Privacy compliance</span><span class="value" data-count="98.9" data-dec="1" data-suffix="%">98.9%</span><span class="label">of page views now load the consent manager, up from under 1.5%</span></li><li class="rv"><span class="topic">Ad measurement</span><span class="value" data-count="21" data-dec="0" data-suffix="%">21%</span><span class="label">of paid-ad visits never reached analytics, measured by a pipeline I built</span></li><li class="rv"><span class="topic">Click speed</span><span class="value" data-count="0.5" data-dec="1" data-suffix=" s">0.5 s</span><span class="label">less wait after each button click, because I removed a pause in the old tracking code</span></li><li class="rv"><span class="topic">AI automation</span><span class="value" data-count="36" data-dec="0" data-suffix=" pages">36 pages</span><span class="label">new pages added to outage monitoring by an AI agent using my audit tool</span></li>
   </ul>
 </section>
 
@@ -311,13 +311,13 @@ code{font:500 .9em var(--mono);background:var(--accent-soft);padding:.1em .4em;b
       <header class="study-head">
         <span class="study-no" aria-hidden="true">04</span>
         <h3>AI agents with a human at the gate</h3>
-        <p class="metric"><span class="metric-topic">AI automation</span><span class="metric-value">36 pages</span><span class="metric-label">now watched for outages, found and added by an AI agent using my audit tool</span></p>
+        <p class="metric"><span class="metric-topic">AI automation</span><span class="metric-value">36 pages</span><span class="metric-label">new pages added to outage monitoring by an AI agent using my audit tool</span></p>
       </header>
       <div class="study-body">
         <dl class="story">
           <div><dt>The problem</dt><dd>Two jobs were repetitive and easy to get wrong: publishing legal documents to the website, and checking which pages the outage monitoring does not watch.</dd></div>
           <div><dt>What I did</dt><dd>I created Flex’s internal Claude Code plugin marketplace (manifest checks and AI review in CI, golden-snapshot tests, opt-in installs, CODEOWNERS) and shipped two plugins on it. <code>/legal-ticket</code> turns a Notion ticket into a checked CDN page, a PDF and a deploy runbook. Nothing is written unless a ≥ 0.996 word-accuracy gate passes, and the production upload stays human-only. <code>/uptime-scope-audit</code> compares the sitemap and the CMS API with the monitoring list and opens a pull request.</dd></div>
-          <div class="win"><dt>The result</dt><dd>The audit’s first run found 64 pages nobody was watching (the sitemap alone misses ~28%). Flex’s infrastructure agent now runs it unattended, and 36 pages were added to monitoring that way.</dd></div>
+          <div class="win"><dt>The result</dt><dd>The audit’s first run found 64 pages nobody was watching (the sitemap alone misses ~28%). Flex’s infrastructure agent now runs it unattended, and it has added 36 pages to the monitoring list so far.</dd></div>
           
         </dl>
         <ol class="flow" aria-label="How it works"><li>Notion ticket</li><li>Plugin builds page</li><li>Accuracy gate ≥ 0.996</li><li>Human uploads to production</li></ol>
