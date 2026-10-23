@@ -290,9 +290,26 @@ code{font:500 .9em var(--mono);background:var(--accent-soft);padding:.1em .4em;b
         <ul class="chips"><li>CloudFront</li><li>Athena</li><li>Snowflake</li><li>Amplitude</li><li>SQL</li></ul>
       </div>
     </article>
-    <article class="study rv" id="clicks">
+    <article class="study rv" id="helpcenter">
       <header class="study-head">
         <span class="study-no" aria-hidden="true">03</span>
+        <h3>Rebranding the help center every year, and rebuilding it this year</h3>
+        <p class="metric"><span class="metric-topic">Testing</span><span class="metric-value">600+</span><span class="metric-label">automated checks guard the help center I rebuilt from scratch</span></p>
+      </header>
+      <div class="study-body">
+        <dl class="story">
+          <div><dt>The problem</dt><dd>Flex’s Zendesk help center is rebranded every year, and I did all three: 2024, 2025 and this year. This year’s was not a repaint. It needed a ground-up rebuild on Zendesk’s Guide Templating API v4.</dd></div>
+          <div><dt>What I did</dt><dd>I built 32 templates with esbuild and token-driven CSS, with accessibility first, plus a chat loader that talks to the mobile app through a versioned contract. It is guarded by 328 unit tests and about 300 Playwright checks, and it went live on Oct 16, 2026 through a reviewer-gated deploy with a smoke test and automatic rollback. I also moved deploys to OAuth 2.0 ahead of Zendesk’s API-token sunset.</dd></div>
+          <div class="win"><dt>The result</dt><dd>A support site that is tested like a product and can be rolled back in one step.</dd></div>
+          
+        </dl>
+        <ol class="flow" aria-label="How it works"><li>Change ready</li><li>Reviewer approves</li><li>Deploy</li><li>Smoke test</li><li>Automatic rollback if it fails</li></ol>
+        <ul class="chips"><li>Zendesk Guide</li><li>Handlebars</li><li>esbuild</li><li>Playwright</li><li>node:test</li><li>OAuth 2.0</li></ul>
+      </div>
+    </article>
+    <article class="study rv" id="clicks">
+      <header class="study-head">
+        <span class="study-no" aria-hidden="true">04</span>
         <h3>Faster buttons, and A/B tests you can believe</h3>
         <p class="metric"><span class="metric-topic">Click speed</span><span class="metric-value">0.5 s</span><span class="metric-label">less wait after each button click, because I removed a pause in the old tracking code</span></p>
       </header>
@@ -309,7 +326,7 @@ code{font:500 .9em var(--mono);background:var(--accent-soft);padding:.1em .4em;b
     </article>
     <article class="study rv" id="agents">
       <header class="study-head">
-        <span class="study-no" aria-hidden="true">04</span>
+        <span class="study-no" aria-hidden="true">05</span>
         <h3>AI agents with a human at the gate</h3>
         <p class="metric"><span class="metric-topic">AI automation</span><span class="metric-value">36 pages</span><span class="metric-label">new pages added to outage monitoring by an AI agent using my audit tool</span></p>
       </header>
@@ -326,7 +343,7 @@ code{font:500 .9em var(--mono);background:var(--accent-soft);padding:.1em .4em;b
     </article>
     <article class="study rv" id="uptime">
       <header class="study-head">
-        <span class="study-no" aria-hidden="true">05</span>
+        <span class="study-no" aria-hidden="true">06</span>
         <h3>Watching 479 URLs for a few dollars a month</h3>
         <p class="metric"><span class="metric-topic">Monitoring cost</span><span class="metric-value">479 URLs</span><span class="metric-label">monitored for under $10 a month (est.), vs $2.2–4.3K on Datadog Synthetics</span></p>
       </header>
@@ -341,30 +358,13 @@ code{font:500 .9em var(--mono);background:var(--accent-soft);padding:.1em .4em;b
         <ul class="chips"><li>Python</li><li>AWS Lambda</li><li>Terraform</li><li>Datadog</li><li>PagerDuty</li><li>httpx</li></ul>
       </div>
     </article>
-    <article class="study rv" id="helpcenter">
-      <header class="study-head">
-        <span class="study-no" aria-hidden="true">06</span>
-        <h3>A help center rebuilt from scratch, with 600+ checks behind it</h3>
-        <p class="metric"><span class="metric-topic">Testing</span><span class="metric-value">600+</span><span class="metric-label">automated checks guard the help center I rebuilt from scratch</span></p>
-      </header>
-      <div class="study-body">
-        <dl class="story">
-          <div><dt>The problem</dt><dd>Flex’s Zendesk help center needed a ground-up rebuild on Zendesk’s Guide Templating API v4.</dd></div>
-          <div><dt>What I did</dt><dd>I built 32 templates with esbuild and token-driven CSS, with accessibility first, plus a chat loader that talks to the mobile app through a versioned contract. It is guarded by 328 unit tests and about 300 Playwright checks, and it went live on Oct 16, 2026 through a reviewer-gated deploy with a smoke test and automatic rollback. I also moved deploys to OAuth 2.0 ahead of Zendesk’s API-token sunset.</dd></div>
-          <div class="win"><dt>The result</dt><dd>A support site that is tested like a product and can be rolled back in one step.</dd></div>
-          
-        </dl>
-        <ol class="flow" aria-label="How it works"><li>Change ready</li><li>Reviewer approves</li><li>Deploy</li><li>Smoke test</li><li>Automatic rollback if it fails</li></ol>
-        <ul class="chips"><li>Zendesk Guide</li><li>Handlebars</li><li>esbuild</li><li>Playwright</li><li>node:test</li><li>OAuth 2.0</li></ul>
-      </div>
-    </article>
   </div>
 </section>
 
 <section class="block tint" id="more" aria-labelledby="more-h">
   <div class="wrap">
     <div class="sec-head rv"><p class="eyebrow">Also shipped</p><h2 id="more-h">More work from the same team</h2></div>
-    <div class="grid"><article class="card rv"><h3>Flex Website 2.0 rebrand</h3><p>Owned <b>63 pages</b> of the Webflow rebrand and the 414-URL cutover inventory, then repaired the post-launch gaps (17 authors recreated, 222 CMS items re-linked, 49 legal files re-keyed).</p></article><article class="card rv"><h3>Legal-content pipeline</h3><p>Designed a gated DOCX → HTML pipeline (pandoc + BeautifulSoup, word-level fidelity gate ≥ 0.996, human-only production upload) and moved <b>47 of 58 legal pages</b> to S3/CloudFront, verified on QA within two days (25/25 PDFs SHA-256-identical to the originals). Restored 231 words that had been truncated from a live bank agreement.</p></article><article class="card rv"><h3>SEO and structured data</h3><p>Fixed placeholder titles across four CMS templates and added Article schema with bylines: Ahrefs had flagged <b>226 short-title pages</b>; a crawl of all 275 live pages afterwards found zero.</p></article><article class="card rv"><h3>Billing-statement emails</h3><p>Migrated two partner banks’ billing-statement emails from Iterable to Braze Canvas (Liquid), with a 36-field data contract checked against production payloads and fixes for Gmail clipping.</p></article><article class="card rv"><h3>Visual and performance QA harness</h3><p>Built a Playwright + Lighthouse harness (10 browser/device configs, Figma reference comparison, WCAG contrast and link checks). Partner pages score <b>89–95 desktop and 78–94 mobile</b> performance, CLS ≤ 0.041, accessibility 92–96; a full-site crawl (413 routes, 25,836 links) found 7 broken links.</p></article><article class="card rv"><h3>Paid landing pages</h3><p>Built the “Split your rent” calculator widget for Flex’s Unbounce landing pages, replaced jQuery carousels with vanilla JS, and caught a pre-launch regression that had disabled every overlay-style CTA.</p></article></div>
+    <div class="grid"><article class="card rv"><h3>Flex Website 2.0 rebrand</h3><p>Owned <b>63 pages</b> of the Webflow rebrand (my third yearly site rebrand, after 2024 and 2025) and the 414-URL cutover inventory, then repaired the post-launch gaps (17 authors recreated, 222 CMS items re-linked, 49 legal files re-keyed).</p></article><article class="card rv"><h3>Legal-content pipeline</h3><p>Designed a gated DOCX → HTML pipeline (pandoc + BeautifulSoup, word-level fidelity gate ≥ 0.996, human-only production upload) and moved <b>47 of 58 legal pages</b> to S3/CloudFront, verified on QA within two days (25/25 PDFs SHA-256-identical to the originals). Restored 231 words that had been truncated from a live bank agreement.</p></article><article class="card rv"><h3>SEO and structured data</h3><p>Fixed placeholder titles across four CMS templates and added Article schema with bylines: Ahrefs had flagged <b>226 short-title pages</b>; a crawl of all 275 live pages afterwards found zero.</p></article><article class="card rv"><h3>Billing-statement emails</h3><p>Migrated two partner banks’ billing-statement emails from Iterable to Braze Canvas (Liquid), with a 36-field data contract checked against production payloads and fixes for Gmail clipping.</p></article><article class="card rv"><h3>Visual and performance QA harness</h3><p>Built a Playwright + Lighthouse harness (10 browser/device configs, Figma reference comparison, WCAG contrast and link checks). Partner pages score <b>89–95 desktop and 78–94 mobile</b> performance, CLS ≤ 0.041, accessibility 92–96; a full-site crawl (413 routes, 25,836 links) found 7 broken links.</p></article><article class="card rv"><h3>Paid landing pages</h3><p>Built the “Split your rent” calculator widget for Flex’s Unbounce landing pages, replaced jQuery carousels with vanilla JS, and caught a pre-launch regression that had disabled every overlay-style CTA.</p></article></div>
   </div>
 </section>
 
