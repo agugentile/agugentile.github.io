@@ -31,6 +31,10 @@
   --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --gutter:clamp(16px,4.5vw,40px); --max:1160px;
+  --glass-bg:rgba(18,28,50,.44); --glass-bg-soft:rgba(18,28,50,.30); --glass-border:rgba(204,233,255,.16); --glass-hi:rgba(255,255,255,.12);
+  --glass-shadow:0 26px 60px -30px rgba(0,0,0,.75); --glass-shadow-sm:0 10px 26px -14px rgba(0,0,0,.7); --glass-blur:18px;
+  --sheen:rgba(153,211,255,.12); --grid-hot:rgba(153,211,255,.28);
+  --blob-a:rgba(88,150,255,.44); --blob-b:rgba(190,180,253,.38); --blob-c:rgba(103,232,249,.26);
   color-scheme:dark;
 }
 :root[data-theme="light"]{
@@ -40,6 +44,10 @@
   --accent-soft:rgba(0,109,221,.07); --accent2-soft:rgba(91,75,214,.08);
   --btn-bg:#030710; --btn-fg:#f8f7ff;
   --glow-a:rgba(0,109,221,.16); --glow-b:rgba(120,100,240,.16); --grid:rgba(3,7,16,.06); --live:#16a34a;
+  --glass-bg:rgba(255,255,255,.58); --glass-bg-soft:rgba(255,255,255,.42); --glass-border:rgba(3,7,16,.10); --glass-hi:rgba(255,255,255,.95);
+  --glass-shadow:0 26px 50px -28px rgba(40,60,140,.30); --glass-shadow-sm:0 10px 24px -14px rgba(40,60,140,.35);
+  --sheen:rgba(0,109,221,.09); --grid-hot:rgba(0,109,221,.24);
+  --blob-a:rgba(0,109,221,.30); --blob-b:rgba(120,100,240,.28); --blob-c:rgba(0,190,230,.20);
   color-scheme:light;
 }
 
@@ -125,7 +133,7 @@ ul,ol{margin:0}
 
 /* sections */
 .block{padding:clamp(64px,10vw,120px) 0}
-.tint{background:linear-gradient(180deg,var(--surface),var(--bg));border-block:1px solid var(--rule)}
+.tint{background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 42%,transparent),transparent);border-block:1px solid var(--rule)}
 .sec-head{max-width:46rem;margin-bottom:clamp(32px,6vw,60px)}
 .sec-head h2,.contact h2{font-size:clamp(1.9rem,4.6vw,3.2rem);letter-spacing:-.04em}
 .sec-intro{margin:18px 0 0;color:var(--muted);font-size:1.08rem}
@@ -153,7 +161,7 @@ code{font:500 .88em var(--mono);background:var(--accent2-soft);color:var(--accen
 @media (max-width:560px){.story>div{grid-template-columns:1fr;gap:4px}}
 
 .flow{list-style:none;margin:30px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px 6px}
-.flow li{position:relative;padding:8px 14px;border:1px solid var(--rule);border-radius:10px;background:var(--raised);font-size:.84rem;line-height:1.3;font-weight:500}
+.flow li{position:relative;padding:8px 14px;border:1px solid var(--rule);border-radius:10px;background:var(--glass-bg-soft);box-shadow:inset 0 1px 0 var(--glass-hi);font-size:.84rem;line-height:1.3;font-weight:500}
 .flow li:not(:last-child){margin-right:20px}
 .flow li:not(:last-child)::after{content:"→";position:absolute;right:-19px;top:50%;transform:translateY(-52%);color:var(--accent-2);font-weight:600}
 .flow li:last-child{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink)}
@@ -218,24 +226,58 @@ code{font:500 .88em var(--mono);background:var(--accent2-soft);color:var(--accen
 .foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-top:clamp(32px,5vw,56px);padding-top:22px;border-top:1px solid var(--rule);font-size:.85rem}
 @media (max-width:820px){.foot-grid{grid-template-columns:1fr 1fr}.foot-brand{grid-column:1/-1}}
 
+/* hero pointer light: blobs trail the pointer at different speeds, the grid brightens around it */
+.fx{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.fx-grid{position:absolute;inset:0;opacity:0;transition:opacity .5s;background-image:linear-gradient(var(--grid-hot) 1px,transparent 1px),linear-gradient(90deg,var(--grid-hot) 1px,transparent 1px);background-size:64px 64px;background-position:center top;-webkit-mask-image:radial-gradient(circle 260px at var(--mx,50%) var(--my,36%),#000,transparent 70%);mask-image:radial-gradient(circle 260px at var(--mx,50%) var(--my,36%),#000,transparent 70%)}
+.hero.live .fx-grid{opacity:1}
+.fx-blob{position:absolute;width:0;height:0;will-change:transform}
+.fx-blob b{position:absolute;display:block;left:calc(var(--s) / -2);top:calc(var(--s) / -2);width:var(--s);height:var(--s);border-radius:50%;background:radial-gradient(closest-side,var(--c),transparent 72%);animation:wob 16s ease-in-out infinite alternate}
+.fx-blob.b1{--s:min(78vw,640px);--c:var(--blob-a)}
+.fx-blob.b2{--s:min(64vw,520px);--c:var(--blob-b)}.fx-blob.b2 b{animation-duration:21s;animation-delay:-6s}
+.fx-blob.b3{--s:min(52vw,420px);--c:var(--blob-c)}.fx-blob.b3 b{animation-duration:26s;animation-delay:-11s}
+@keyframes wob{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(28px,-20px,0) scale(1.12,.92)}100%{transform:translate3d(-24px,22px,0) scale(.92,1.1)}}
+
+/* ambient light behind the whole page, so the glass below has something to blur */
+.ambient{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.ambient i{position:absolute;width:min(70vw,780px);aspect-ratio:1;border-radius:50%;opacity:.8;will-change:transform;animation:drift 40s ease-in-out infinite alternate}
+.ambient .a1{left:-14%;top:10%;background:radial-gradient(closest-side,var(--blob-a),transparent 72%)}
+.ambient .a2{right:-18%;top:44%;background:radial-gradient(closest-side,var(--blob-b),transparent 72%);animation-duration:52s;animation-delay:-14s}
+.ambient .a3{left:22%;bottom:-26%;background:radial-gradient(closest-side,var(--blob-c),transparent 72%);animation-duration:46s;animation-delay:-24s}
+@keyframes drift{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(7vw,-6vh,0) scale(1.14,.94)}100%{transform:translate3d(-6vw,7vh,0) scale(.94,1.1)}}
+
+/* glass: translucent surfaces that blur the light behind them, with a bevel highlight and a sheen that follows the pointer */
+.impact ul,.study,.card,.timeline,.cta-panel{background:var(--glass-bg);border-color:var(--glass-border);box-shadow:inset 0 1px 0 var(--glass-hi),var(--glass-shadow);-webkit-backdrop-filter:blur(var(--glass-blur)) saturate(1.6);backdrop-filter:blur(var(--glass-blur)) saturate(1.6)}
+.pill,.theme,.btn-ghost{background:var(--glass-bg);border-color:var(--glass-border);box-shadow:inset 0 1px 0 var(--glass-hi),var(--glass-shadow-sm);-webkit-backdrop-filter:blur(12px) saturate(1.6);backdrop-filter:blur(12px) saturate(1.6)}
+.btn-ghost:hover{background:var(--accent-soft);border-color:var(--accent)}
+.chips li,.track li{box-shadow:inset 0 1px 0 var(--glass-hi)}
+.impact ul,.timeline{position:relative}
+.card::after,.study::after,.impact ul::after,.timeline::after,.cta-panel::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s;background:radial-gradient(380px circle at var(--gx,50%) var(--gy,0%),var(--sheen),transparent 62%)}
+.card:hover::after,.study:hover::after,.impact ul:hover::after,.timeline:hover::after,.cta-panel:hover::after{opacity:1}
+.js .card.rv.in{transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .22s,border-color .2s}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  :root{--glass-bg:var(--surface);--glass-bg-soft:var(--raised)}
+}
+@media (max-width:720px){:root{--glass-blur:10px}.ambient i{animation:none}}
+
 /* reveal */
 .js .rv{opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
 .js .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .hero-in>*,.pill .dot{animation:none}
+  .hero-in>*,.pill .dot,.fx-blob b,.ambient i{animation:none}
   .marquee{display:block;-webkit-mask-image:none;mask-image:none}
   .track{animation:none;flex-wrap:wrap;justify-content:center}
   .track[aria-hidden]{display:none}
   .js .rv{opacity:1;transform:none;transition:none}
   .btn,.card{transition:none}
 }
-@media print{.top,.hero::before,.hero::after,.theme,.marquee{display:none}.js .rv{opacity:1;transform:none}}
+@media print{.top,.hero::before,.hero::after,.theme,.marquee,.fx,.ambient{display:none}.js .rv{opacity:1;transform:none}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Augusto Gentile","jobTitle":"Growth & Marketing Engineer","url":"https://agugentile.github.io/","address":{"@type":"PostalAddress","addressLocality":"Córdoba","addressCountry":"AR"},"sameAs":["https://www.linkedin.com/in/gentileaugusto/","https://github.com/agugentile"],"knowsAbout":["Growth engineering","Marketing technology","Web analytics","Privacy consent management","Experimentation","AI automation"]}</script>
 </head>
 <body>
 <a class="skip" href="#work">Skip to the work</a>
+<div class="ambient" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
 <header class="top" id="top">
   <div class="wrap top-in">
     <a class="brand" href="#top" aria-label="Augusto Gentile, back to top"><span class="brand-mark" aria-hidden="true">AG</span><span class="brand-name">Augusto Gentile</span></a>
@@ -251,6 +293,7 @@ code{font:500 .88em var(--mono);background:var(--accent2-soft);color:var(--accen
 
 <main>
 <section class="hero">
+  <div class="fx" aria-hidden="true"><i class="fx-grid"></i><i class="fx-blob b1" style="left:50%;top:36%" data-rx="50" data-ry="36" data-k="0.16"><b></b></i><i class="fx-blob b2" style="left:63%;top:52%" data-rx="63" data-ry="52" data-k="0.08"><b></b></i><i class="fx-blob b3" style="left:36%;top:60%" data-rx="36" data-ry="60" data-k="0.045"><b></b></i></div>
   <div class="wrap hero-in">
     <a class="pill" href="#contact"><span class="dot" aria-hidden="true"></span>Open to new remote roles <span class="go" aria-hidden="true">→</span></a>
     <p class="kicker">Growth &amp; Marketing Engineer</p>
@@ -501,6 +544,46 @@ code{font:500 .88em var(--mono);background:var(--accent2-soft);color:var(--accen
   if(!reduce&&'IntersectionObserver' in window){
     var co=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){run(e.target);co.unobserve(e.target)}})},{threshold:.6});
     counters.forEach(function(el){co.observe(el)});
+  }
+
+  var fine=window.matchMedia&&matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var hero=document.querySelector('.hero');
+  if(hero&&fine&&!reduce){
+    var blobs=[].slice.call(hero.querySelectorAll('.fx-blob')),st=[],W=0,H=0,raf=0,inside=false,cx=0,cy=0;
+    function measure(){
+      var r=hero.getBoundingClientRect(),old=st;W=r.width;H=r.height;
+      var b0x=+blobs[0].getAttribute('data-rx')/100*W,b0y=+blobs[0].getAttribute('data-ry')/100*H;
+      st=blobs.map(function(el,i){
+        var rx=+el.getAttribute('data-rx')/100*W,ry=+el.getAttribute('data-ry')/100*H;
+        return{el:el,rx:rx,ry:ry,k:+el.getAttribute('data-k'),ox:rx-b0x,oy:ry-b0y,x:old[i]?old[i].x:rx,y:old[i]?old[i].y:ry};
+      });
+    }
+    function frame(){
+      raf=0;var moving=false,r=inside?hero.getBoundingClientRect():null;
+      st.forEach(function(s){
+        var tx=inside?cx-r.left+s.ox*.6:s.rx,ty=inside?cy-r.top+s.oy*.6:s.ry;
+        s.x+=(tx-s.x)*s.k;s.y+=(ty-s.y)*s.k;
+        if(Math.abs(tx-s.x)>.3||Math.abs(ty-s.y)>.3)moving=true;
+        s.el.style.transform='translate3d('+(s.x-s.rx).toFixed(1)+'px,'+(s.y-s.ry).toFixed(1)+'px,0)';
+      });
+      hero.style.setProperty('--mx',st[0].x.toFixed(0)+'px');hero.style.setProperty('--my',st[0].y.toFixed(0)+'px');
+      if(moving)raf=requestAnimationFrame(frame);
+    }
+    function kick(){if(!raf)raf=requestAnimationFrame(frame)}
+    measure();
+    hero.addEventListener('pointermove',function(e){if(e.pointerType==='touch')return;inside=true;cx=e.clientX;cy=e.clientY;hero.classList.add('live');kick()},{passive:true});
+    hero.addEventListener('pointerleave',function(){inside=false;hero.classList.remove('live');kick()});
+    window.addEventListener('scroll',function(){if(inside)kick()},{passive:true});
+    window.addEventListener('resize',function(){measure();kick()});
+  }
+
+  if(fine&&!reduce){
+    [].forEach.call(document.querySelectorAll('.card,.study,.impact ul,.timeline,.cta-panel'),function(el){
+      el.addEventListener('pointermove',function(e){
+        var r=el.getBoundingClientRect();
+        el.style.setProperty('--gx',(e.clientX-r.left).toFixed(0)+'px');el.style.setProperty('--gy',(e.clientY-r.top).toFixed(0)+'px');
+      },{passive:true});
+    });
   }
 })();</script>
 </body>
