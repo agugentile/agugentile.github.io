@@ -348,9 +348,9 @@ code{font:500 .88em var(--mono);background:var(--accent2-soft);color:var(--accen
       </header>
       <div class="study-body">
         <dl class="story">
-          <div><dt>The problem</dt><dd>Paid-ad arrivals and analytics page views did not line up. An early estimate put the gap at 45–52%, a number worth checking before anyone acted on it.</dd></div>
+          <div><dt>The problem</dt><dd>Paid-ad arrivals and analytics page views did not line up, and the size of the gap was unclear.</dd></div>
           <div><dt>What I did</dt><dd>I built a pipeline that recorded every paid arrival with a beacon on CloudFront, then joined it to Amplitude page views in Athena and Snowflake. The join covered 99.8% of page views, and a query cost about $0.07.</dd></div>
-          <div class="win"><dt>The result</dt><dd>Paid arrivals were 1.26× recorded page views, a gap of about 21%. The earlier 45–52% figure was wrong, so I corrected it and said so.</dd></div>
+          <div class="win"><dt>The result</dt><dd>Paid arrivals were 1.26× recorded page views, a gap of about 21%.</dd></div>
           <div><dt>Behind it</dt><dd>The goal was not the pipeline. It was knowing how far the dashboard could be trusted.</dd></div>
         </dl>
         <ol class="flow" aria-label="How it works"><li>Ad click</li><li>CloudFront beacon</li><li>Athena join</li><li>Snowflake</li><li>Gap measured</li></ol>
@@ -438,7 +438,7 @@ code{font:500 .88em var(--mono);background:var(--accent2-soft);color:var(--accen
 <section class="block" id="principles" aria-labelledby="principles-h">
   <div class="wrap">
     <div class="sec-head rv"><p class="eyebrow">How I work</p><h2 id="principles-h">Three habits behind all of it</h2></div>
-    <ol class="principles"><li class="card rv"><span class="roman" aria-hidden="true">01</span><h3>Measure before you trust</h3><p>My first estimate of missing paid traffic was wrong. I measured it properly, got 21%, and replaced the old number everywhere.</p></li><li class="card rv"><span class="roman" aria-hidden="true">02</span><h3>Automation gets a gate</h3><p>Agents do the repetitive work. A check decides whether the result is good enough, and a person still presses the button for anything that reaches production.</p></li><li class="card rv"><span class="roman" aria-hidden="true">03</span><h3>Every change can be undone</h3><p>Snapshots, rollbacks and reviewer-gated deploys mean a bad release is a quick revert, not a weekend.</p></li></ol>
+    <ol class="principles"><li class="card rv"><span class="roman" aria-hidden="true">01</span><h3>Measure before you trust</h3><p>A dashboard is only useful if you know how far to trust it. I measured the paid-traffic gap from raw data and got 21%.</p></li><li class="card rv"><span class="roman" aria-hidden="true">02</span><h3>Automation gets a gate</h3><p>Agents do the repetitive work. A check decides whether the result is good enough, and a person still presses the button for anything that reaches production.</p></li><li class="card rv"><span class="roman" aria-hidden="true">03</span><h3>Every change can be undone</h3><p>Snapshots, rollbacks and reviewer-gated deploys mean a bad release is a quick revert, not a weekend.</p></li></ol>
   </div>
 </section>
 
