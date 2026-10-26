@@ -313,7 +313,7 @@ code{font:500 .88em var(--mono);background:var(--accent2-soft);color:var(--accen
 
 <section class="impact wrap" aria-label="Results at a glance">
   <ul>
-    <li class="rv"><span class="topic">Privacy compliance</span><span class="value" data-count="98.9" data-dec="1" data-suffix="%">98.9%</span><span class="label">of page views loaded the consent manager, up from under 1.5%</span></li><li class="rv"><span class="topic">Ad measurement</span><span class="value" data-count="21" data-dec="0" data-suffix="%">21%</span><span class="label">of paid-ad visits never reached analytics, measured by a pipeline I built</span></li><li class="rv"><span class="topic">Click speed</span><span class="value" data-count="0.5" data-dec="1" data-suffix=" s">0.5 s</span><span class="label">less wait after each button click, because I removed a pause in the old tracking code</span></li><li class="rv"><span class="topic">AI automation</span><span class="value" data-count="36" data-dec="0" data-suffix=" pages">36 pages</span><span class="label">new pages added to outage monitoring by an AI agent using my audit tool</span></li>
+    <li class="rv"><span class="topic">Privacy compliance</span><span class="value" data-count="98.9" data-dec="1" data-suffix="%">98.9%</span><span class="label">of page views loaded the consent manager, up from under 1.5%</span></li><li class="rv"><span class="topic">Ad measurement</span><span class="value" data-count="21" data-dec="0" data-suffix="%">21%</span><span class="label">of paid-ad visits never reached analytics, measured by a pipeline I built</span></li><li class="rv"><span class="topic">Button speed</span><span class="value" data-count="0.5" data-dec="1" data-suffix=" s">0.5 s</span><span class="label">faster to open the next page after a button click. I removed a wait built into the old tracking</span></li><li class="rv"><span class="topic">AI automation</span><span class="value" data-count="36" data-dec="0" data-suffix=" pages">36 pages</span><span class="label">new pages added to outage monitoring by an AI agent using my audit tool</span></li>
   </ul>
 </section>
 
@@ -376,12 +376,12 @@ code{font:500 .88em var(--mono);background:var(--accent2-soft);color:var(--accen
       <header class="study-head">
         <p class="study-no" aria-hidden="true"><span>04</span> / 06</p>
         <h3>Faster buttons, and A/B tests you can believe</h3>
-        <p class="metric"><span class="metric-topic">Click speed</span><span class="metric-value">0.5 s</span><span class="metric-label">less wait after each button click, because I removed a pause in the old tracking code</span></p>
+        <p class="metric"><span class="metric-topic">Button speed</span><span class="metric-value">0.5 s</span><span class="metric-label">faster to open the next page after a button click. I removed a wait built into the old tracking</span></p>
       </header>
       <div class="study-body">
         <dl class="story">
-          <div><dt>The problem</dt><dd>The old click-tracking code paused every button click before the visitor moved on. A/B test exposure counts also looked too high.</dd></div>
-          <div><dt>What I did</dt><dd>I moved click tracking to Amplitude autocapture (SDK 2.7 to 2.45) and reconciled it to within 0.15% of the old events before deleting the old layer. The new engagement and error events exposed three hidden production defects (about 3.3K unhandled errors a day) within an hour. I also fixed A/B exposure counts that were inflated 1.34–1.56×.</dd></div>
+          <div><dt>The problem</dt><dd>The old click-tracking script held visitors on the page for a moment after they clicked a main button, so the next page opened late. A/B test counts also looked too high.</dd></div>
+          <div><dt>What I did</dt><dd>I replaced that script with Amplitude’s built-in click tracking (SDK 2.7 to 2.45) and checked it against the old data until the two matched within 0.15%, then deleted the old script. The new engagement and error events exposed three hidden production bugs (about 3.3K unhandled errors a day) within an hour. I also fixed A/B test counts that were inflated 1.34–1.56×.</dd></div>
           <div class="win"><dt>The result</dt><dd>Buttons responded about half a second sooner, and experiment results rested on honest counts.</dd></div>
           
         </dl>
