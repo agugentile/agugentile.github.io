@@ -381,11 +381,11 @@ code{font:500 .88em var(--mono);background:var(--accent2-soft);color:var(--accen
       <div class="study-body">
         <dl class="story">
           <div><dt>The problem</dt><dd>The old click-tracking script held visitors on the page for a moment after they clicked a main button, so the next page opened late. A/B test counts also looked too high.</dd></div>
-          <div><dt>What I did</dt><dd>I replaced that script with Amplitude’s built-in click tracking (SDK 2.7 to 2.45) and compared both over a week of real traffic, and their click counts differed by only 0.15%, so I deleted the old script. The new engagement and error events exposed three hidden production bugs (about 3.3K unhandled errors a day) within an hour. I also fixed A/B test counts that were inflated 1.34–1.56×.</dd></div>
+          <div><dt>What I did</dt><dd>I upgraded Amplitude’s tracking library (its SDK) to a newer version that records button clicks on its own, and compared it with the old script over a week of real traffic: their click counts differed by only 0.15%, so I deleted the old script. The new engagement and error events exposed three hidden production bugs (about 3.3K unhandled errors a day) within an hour. I also fixed A/B test counts that were inflated 1.34–1.56×.</dd></div>
           <div class="win"><dt>The result</dt><dd>Buttons responded about half a second sooner, and experiment results rested on honest counts.</dd></div>
           
         </dl>
-        <ol class="flow" aria-label="How it works"><li>Old tracking script</li><li>Built-in tracking</li><li>Counts differ by 0.15%</li><li>Old script deleted</li></ol>
+        <ol class="flow" aria-label="How it works"><li>Old tracking script</li><li>Amplitude upgraded</li><li>Counts differ by 0.15%</li><li>Old script deleted</li></ol>
         <ul class="chips"><li>Amplitude</li><li>JavaScript</li><li>A/B testing</li><li>Unbounce</li></ul>
       </div>
     </article>
